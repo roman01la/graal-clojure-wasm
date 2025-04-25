@@ -4,8 +4,10 @@
                         ;; optional native image name override
                         "-H:Name=core"
                         ;; turns unrelated erros into warnings
-                        "-H:+AllowDeprecatedBuilderClassesOnImageClasspath"]
-            :jvm-opts ["-Dclojure.compiler.direct-linking=true"]
+                        "-H:+AllowDeprecatedBuilderClassesOnImageClasspath"
+                        "-march=native"]
+            :jvm-opts ["-Dclojure.compiler.direct-linking=true"
+                       "-Dclojure.spec.skip-macros=true"]
             :extra-deps
             {clj.native-image/clj.native-image
              {:git/url "https://github.com/taylorwood/clj.native-image.git"
