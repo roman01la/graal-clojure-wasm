@@ -1308,6 +1308,36 @@ wasmImports.interop = {
 }
 ;
 wasmImports.jsbody = {
+	'_Browser.addEventListener___JSObject_String_Callback_V' : (...args) => (function(element,eventType,handler){
+		try{
+			element.addEventListener(eventType, handler);
+		}catch( e ) {
+			conversion.handleJSError(e);}}).call(...args),
+	'_Browser.appendChild___JSObject_JSObject_V' : (...args) => (function(parent,child){
+		try{
+			return parent.appendChild(child);
+		}catch( e ) {
+			conversion.handleJSError(e);}}).call(...args),
+	'_Browser.createElement___String_JSObject' : (...args) => (function(tag){
+		try{
+			return document.createElement(tag);
+		}catch( e ) {
+			conversion.handleJSError(e);}}).call(...args),
+	'_Browser.globalThis___JSObject' : (...args) => (function(){
+		try{
+			return globalThis;
+		}catch( e ) {
+			conversion.handleJSError(e);}}).call(...args),
+	'_Browser.querySelector___String_JSObject' : (...args) => (function(selector){
+		try{
+			return document.querySelector(selector);
+		}catch( e ) {
+			conversion.handleJSError(e);}}).call(...args),
+	'_Browser.sink___Object_V' : (...args) => (function(o){
+		try{
+			
+		}catch( e ) {
+			conversion.handleJSError(e);}}).call(...args),
 	'_JSBigInt.javaString___String' : (...args) => (function(){
 		try{
 			return conversion.toProxy(toJavaString(this.toString()));
@@ -1353,9 +1383,24 @@ wasmImports.jsbody = {
 			return conversion.toProxy(conversion.createJavaDouble(this));
 		}catch( e ) {
 			conversion.handleJSError(e);}}).call(...args),
+	'_JSObject.call___Object$Ljava_lang_Object__Object' : (...args) => (function(thisArg,args){
+		try{
+			return this.apply(thisArg, conversion.extractJavaScriptArray(args[runtime.symbol.javaNative]));
+		}catch( e ) {
+			conversion.handleJSError(e);}}).call(...args),
+	'_JSObject.extractFacadeClass___Class_Object' : (...args) => (function(cls){
+		try{
+			return conversion.tryExtractFacadeClass(this, cls);
+		}catch( e ) {
+			conversion.handleJSError(e);}}).call(...args),
 	'_JSObject.get___Object_Object' : (...args) => (function(key){
 		try{
 			return this[key];
+		}catch( e ) {
+			conversion.handleJSError(e);}}).call(...args),
+	'_JSObject.set___Object_Object_V' : (...args) => (function(key,newValue){
+		try{
+			this[key] = newValue;
 		}catch( e ) {
 			conversion.handleJSError(e);}}).call(...args),
 	'_JSObject.stringValue___String' : (...args) => (function(){
@@ -1371,6 +1416,11 @@ wasmImports.jsbody = {
 	'_JSString.javaString___String' : (...args) => (function(){
 		try{
 			return conversion.toProxy(toJavaString(this));
+		}catch( e ) {
+			conversion.handleJSError(e);}}).call(...args),
+	'_JSString.of___String_JSString' : (...args) => (function(s){
+		try{
+			return conversion.extractJavaScriptString(s[runtime.symbol.javaNative]);
 		}catch( e ) {
 			conversion.handleJSError(e);}}).call(...args),
 	'_JSSymbol.javaString___String' : (...args) => (function(){

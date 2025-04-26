@@ -1,14 +1,14 @@
-{:aliases {:native-image
-           {:main-opts ["-m" "clj.native-image" "core"
-                        "--initialize-at-build-time" "--tool:svm-wasm"
-                        ;; optional native image name override
-                        "-H:Name=core"
-                        ;; turns unrelated erros into warnings
-                        "-H:+AllowDeprecatedBuilderClassesOnImageClasspath"
-                        "-march=native"]
-            :jvm-opts ["-Dclojure.compiler.direct-linking=true"
-                       "-Dclojure.spec.skip-macros=true"]
-            :extra-deps
-            {clj.native-image/clj.native-image
-             {:git/url "https://github.com/taylorwood/clj.native-image.git"
-              :sha "4604ae76855e09cdabc0a2ecc5a7de2cc5b775d6"}}}}}
+{:deps {org.graalvm.polyglot/polyglot {:mvn/version "24.2.1"}
+        org.graalvm/webimage {:local/root "$JAVA_HOME/lib/svm/tools/svm-wasm/builder/svm-wasm-api.jar"}
+        clj.native-image/clj.native-image {:git/url "https://github.com/taylorwood/clj.native-image.git"
+                                           :sha "4604ae76855e09cdabc0a2ecc5a7de2cc5b775d6"}}
+ :paths ["src" "target/classes"]
+ :aliases {:classes {:main-opts ["-m" "build"]}
+           :native-image {:main-opts ["-m" "clj.native-image" "core"
+                                      "--initialize-at-build-time" "--tool:svm-wasm"
+                                      ;; optional native image name override
+                                      "-H:Name=core"
+                                      ;; turns unrelated erros into warnings
+                                      "-H:+AllowDeprecatedBuilderClassesOnImageClasspath"]
+                          :jvm-opts ["-Dclojure.compiler.direct-linking=true"
+                                     "-Dclojure.spec.skip-macros=true"]}}}
