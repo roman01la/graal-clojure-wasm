@@ -5,10 +5,12 @@
  :paths ["src" "target/classes"]
  :aliases {:classes {:main-opts ["-m" "build"]}
            :native-image {:main-opts ["-m" "clj.native-image" "core"
-                                      "--initialize-at-build-time" "--tool:svm-wasm"
+                                      "--initialize-at-build-time" "--tool:svm-wasm" "--no-fallback"
+                                      "-H:IncludeLocales=en" "-H:IncludeResources='.*\\.properties$'"
                                       ;; optional native image name override
                                       "-H:Name=core"
                                       ;; turns unrelated erros into warnings
-                                      "-H:+AllowDeprecatedBuilderClassesOnImageClasspath"]
+                                      "-H:+AllowDeprecatedBuilderClassesOnImageClasspath"
+                                      "-march=native"]
                           :jvm-opts ["-Dclojure.compiler.direct-linking=true"
                                      "-Dclojure.spec.skip-macros=true"]}}}

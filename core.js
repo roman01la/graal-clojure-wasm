@@ -1388,7 +1388,7 @@ wasmImports.jsbody = {
 			return this.apply(thisArg, conversion.extractJavaScriptArray(args[runtime.symbol.javaNative]));
 		}catch( e ) {
 			conversion.handleJSError(e);}}).call(...args),
-	'_JSObject.extractFacadeClass___Class_Object' : (...args) => (function(cls){
+	'_JSObject.extractFacadeClass__Ljava_lang_Class__Object' : (...args) => (function(cls){
 		try{
 			return conversion.tryExtractFacadeClass(this, cls);
 		}catch( e ) {
