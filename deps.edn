@@ -6,6 +6,7 @@
  :aliases {:classes {:main-opts ["-m" "build"]}
            :native-image {:main-opts ["-m" "clj.native-image" "core"
                                       "--initialize-at-build-time" "--tool:svm-wasm" "--no-fallback"
+                                      "--emit" "build-report" "-Os"
                                       "-H:IncludeLocales=en" "-H:IncludeResources='.*\\.properties$'"
                                       ;; optional native image name override
                                       "-H:Name=core"
